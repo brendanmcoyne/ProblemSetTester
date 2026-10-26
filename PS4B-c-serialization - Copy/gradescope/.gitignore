@@ -1,0 +1,8 @@
+*.zip
+test.sh
+test.c
+test_bonus.c
+testcalc.sh
+images
+reference
+*~
