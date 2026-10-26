@@ -58,6 +58,20 @@ void deserialize_char(char *c, Buffer *b) {
 
 }
 
+/* serialize_bool: Takes a boolean value and a pointer to a buffer. Stores the boolean as one byte:
+   0 represents false, and 1 represents true. Updates the buffer position after serialization.
+*/
+void serialize_bool(bool x, Buffer *b) {
+   
+}
+
+/* deserialize_bool: Takes a pointer to a boolean and a pointer to a buffer.
+   Reads the most recently serialized boolean. Updates the buffer position after deserialization.
+*/
+void deserialize_bool(bool *x, Buffer *b) {
+    
+}
+
 /* serialize_string: takes in 1) a string to serialize and 2) a pointer to a buffer.
    Serializes the string into the buffer.
 */

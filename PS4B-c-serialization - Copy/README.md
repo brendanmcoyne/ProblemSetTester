@@ -166,7 +166,28 @@ Test Serialize Char 1         : 1/1
 Test Serialize Char 2         : 1/1
 ``` 
 
-## Step 3: Implementing Serialization of string or char* type
+## Step 3: Implementing Serialization of Boolean Values
+
+In this step, you will extend the serialization library to support Boolean values.
+
+In C, Boolean values are represented using the `bool` type, which is available through the `<stdbool.h>` header.
+
+Add serialization capabilities for the `bool` type in `serialize.c`:
+
+```c
+void serialize_bool(bool x, Buffer *b);
+void deserialize_bool(bool *x, Buffer *b);
+```
+
+At this point you should be able to run `make` and `./build/test` and pass the following tests:
+```
+./build/test
+Test Serialize Bool True          : 1/1
+Test Serialize Bool False         : 1/1
+Test Serialize Bool Multiple      : 1/1
+```
+
+## Step 4: Implementing Serialization of string or char* type
 
 Now add serialization of the char * (or C string) data type.
 
@@ -180,7 +201,7 @@ Test Serialize String 1: 1/1
 Test Serialize String 2: 1/1
 ```
 
-## Step 4: Implementing Serialization of a Struct
+## Step 5: Implementing Serialization of a Struct
 
 Now we wish to serialize more complicated data structures. Add serialization capabilities for structs P and T in `serialize_custom.c`.
 
@@ -191,7 +212,7 @@ Test Serialize Struct T       : 1/1
 Test Serialize Struct P+T     : 1/1
 ```
 
-## Step 5: Linked List
+## Step 6: Linked List
 
 Next we want to serialize a linked list data type in `serialize_custom.c`.
 
@@ -201,7 +222,7 @@ Test Serialize Linked List    : 1/1
 Test Serialize Linked List 2  : 1/1
 ```
 
-## Step 6: Read and Write to file
+## Step 7: Read and Write to file
 
 The final feature we wish to add is the ability to read/write our serialized data to a file on our computer. We will call these `.pepper` files (as opposed to python's `.pickle` files).
 
@@ -222,7 +243,7 @@ At this point you should be able to run `make` and `./build/test` and pass the f
 Test Serialize to/from File   : 1/1
 ```
 
-## Step 7: Enjoy Saving/Loading in game.c
+## Step 8: Enjoy Saving/Loading in game.c
 
 Now, try playing the treasure hunting game again. This time, make sure to hit `s` at some point mid-game and specify a filepath to save your game.
 

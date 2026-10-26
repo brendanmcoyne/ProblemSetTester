@@ -169,6 +169,48 @@ int test_serialize_char2() {
     return z == 'a' && y == 'b' && x == 'c';
 }
 
+int test_serialize_bool_true() {
+    Buffer *b = new_buffer();
+
+    serialize_bool(true, b);
+
+    bool result = false;
+    deserialize_bool(&result, b);
+
+    return result == true;
+}
+
+int test_serialize_bool_false() {
+    Buffer *b = new_buffer();
+
+    serialize_bool(false, b);
+
+    bool result = true;
+    deserialize_bool(&result, b);
+
+    return result == false;
+}
+
+int test_serialize_bool_multiple() {
+    Buffer *b = new_buffer();
+
+    serialize_bool(true, b);
+    serialize_bool(false, b);
+    serialize_bool(true, b);
+
+    bool first = false;
+    bool second = true;
+    bool third = false;
+
+    deserialize_bool(&third, b);
+    deserialize_bool(&second, b);
+    deserialize_bool(&first, b);
+
+    return first == true &&
+           second == false &&
+           third == true;
+}
+
 int test_serialize_string1() {
     Buffer *b = new_buffer();
     serialize_string("cs210 is a fun class!", b);
@@ -405,19 +447,21 @@ int run_test(char *test_name, int (*test_func)()) {
 
 char *test_list[] = {
     "Serialize Int 1",       "Serialize Int 2",       "Serialize Float 1",
-    "Serialize Char 1",      "Serialize Char 2",      "Serialize String 1",
+    "Serialize Char 1",      "Serialize Char 2",      "Serialize Bool True",
+    "Serialize Bool False",  "Serialize Bool Multiple", "Serialize String 1",
     "Serialize String 2",    "Serialize Struct P",    "Serialize Struct T",
     "Serialize Struct P+T",  "Serialize Linked List", "Serialize Linked List 2",
     "Serialize to/from File"};
 int (*test_func[])() = {
     &test_serialize_int,         &test_serialize_int2,
     &test_serialize_float,       &test_serialize_char,
-    &test_serialize_char2,       &test_serialize_string1,
-    &test_serialize_string2,     &test_serialize_struct1,
-    &test_serialize_struct2,     &test_serialize_struct3,
-    &test_serialize_linked_list, &test_serialize_linked_list2,
-    &test_serialize_file};
-#define NUM_TESTS 13
+    &test_serialize_char2,       &test_serialize_bool_true,
+    &test_serialize_bool_false,  &test_serialize_bool_multiple,
+    &test_serialize_string1,     &test_serialize_string2,
+    &test_serialize_struct1,     &test_serialize_struct2,
+    &test_serialize_struct3,     &test_serialize_linked_list,
+    &test_serialize_linked_list2,&test_serialize_file};
+#define NUM_TESTS 16
 #define STRINGIFY2(X) #X
 #define STRINGIFY(X) STRINGIFY2(X)
 
